@@ -1,3 +1,4 @@
 # Proctor-Creek-Capstone-Project
 
-Members: Joanna Tolentino, Samuel Milner
+Members: Joanna Tolentino, Dylan Small, Christopher Raulston, Ryan Bauer, Samuel Milner
+
