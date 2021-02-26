@@ -1,3 +1,3 @@
 # Proctor-Creek-Capstone-Project
 
-Members: Joanna Tolentino, 
+Members: Joanna Tolentino, Dylan Small, 
