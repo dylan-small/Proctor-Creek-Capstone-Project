@@ -17,6 +17,12 @@
         <h1>Team 1108</h1>
         <h2>Members: {{ mem1 }}, {{ mem2 }}, {{ mem3 }}, {{ mem4 }}, {{ mem5 }}</h2>
 
+        <form action="/your-name/" method="post">
+            <label for="first-name">first-name: </label>
+            <input id="first-name" type="text" name="first-name" value="">
+            <input type="submit" value="OK">
+        </form>
+
         <!--
             Directions to add Firebase SDK:
             The core Firebase JS SDK is always required and must be listed first.
