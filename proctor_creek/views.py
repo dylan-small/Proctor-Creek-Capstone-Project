@@ -5,13 +5,14 @@ from django.views import View
 # Create your views here.
 # For Firebase JS SDK v7.20.0 and later, measurementId is optional
 firebaseConfig = {
-  apiKey: "AIzaSyBnh3EsTetGpOzDeGUXuQsT7Q-oF8fu1mU",
-  authDomain: "proctor-creek-capstone-project.firebaseapp.com",
-  projectId: "proctor-creek-capstone-project",
-  storageBucket: "proctor-creek-capstone-project.appspot.com",
-  messagingSenderId: "1099094981367",
-  appId: "1:1099094981367:web:74525f31783efc681971f2",
-  measurementId: "G-04YP1GBKLL"
+    "apiKey": "AIzaSyBnh3EsTetGpOzDeGUXuQsT7Q-oF8fu1mU",
+    "authDomain": "proctor-creek-capstone-project.firebaseapp.com",
+    "projectId": "proctor-creek-capstone-project",
+    "storageBucket": "proctor-creek-capstone-project.appspot.com",
+    "messagingSenderId": "1099094981367",
+    "appId": "1:1099094981367:web:74525f31783efc681971f2",
+    "measurementId": "G-04YP1GBKLL",
+    "databaseURL": "https://proctor-creek-capstone-project-default-rtdb.firebaseio.com/"
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -20,7 +21,7 @@ database = firebase.database()
 
 class IndexView(View):
 
-    def home(self, request):
+    def get(self, request):
         mem1 = database.child('Member 1').get().val()
         mem2 = database.child('Member 2').get().val()
         mem3 = database.child('Member 3').get().val()
