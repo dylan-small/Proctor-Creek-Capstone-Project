@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import pyrebase
 from django.views import View
+from forms import Report
 
 # Create your views here.
 # For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -35,3 +36,12 @@ class IndexView(View):
             "mem5": mem5
         }
         return render(request, 'proctor_creek/index.html', context)
+
+    def post(self, request):
+        form = Report(request.POST)
+        if form.is_valid():
+            firstName = form.cleaned_data('')
+            auth.create_user_with_email_and_password(firstName)
+            
+        context = {}
+
