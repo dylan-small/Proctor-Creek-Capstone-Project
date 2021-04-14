@@ -21,8 +21,16 @@ database = firebase.database()
 class IndexView(View):
 
     def home(self, request):
-        day = database.child('Data').child('Day').get().val()
-        id = database.child('Data').child('Id').get().val()
-        projectname = database.child('Data').child('Projectname').get().val()
-        context = {"day": day, "id": id, "projectname": projectname}
+        mem1 = database.child('Member 1').get().val()
+        mem2 = database.child('Member 2').get().val()
+        mem3 = database.child('Member 3').get().val()
+        mem4 = database.child('Member 4').get().val()
+        mem5 = database.child('Member 5').get().val()
+        context = {
+            "mem1": mem1,
+            "mem2": mem2,
+            "mem3": mem3,
+            "mem4": mem4,
+            "mem5": mem5
+        }
         return render(request, 'proctor_creek/index.html', context)
