@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 import pyrebase
 from django.views import View
@@ -38,10 +39,23 @@ class IndexView(View):
         return render(request, 'proctor_creek/index.html', context)
 
     def post(self, request):
-        form = Report(request.POST)
-        if form.is_valid():
-            firstName = form.cleaned_data('')
-            #auth.create_user_with_email_and_password(firstName)
+        # if this is a POST request we need to process the form data
+        if request.method == 'POST':
+            # create a form instance and populate it with data from the request:
+            form = Report(request.POST)
+            # check whether it's valid:
+            if form.is_valid():
+                firstName = form.cleaned_data('')
+                # process the data in form.cleaned_data as required
+                # ...
+                # redirect to a new URL:
+                return HttpResponseRedirect('')
+
+        # if a GET (or any other method) we'll create a blank form
+        else:
+            form = Report()
 
         context = {form}
+
+        return render(request, '', form)
 
