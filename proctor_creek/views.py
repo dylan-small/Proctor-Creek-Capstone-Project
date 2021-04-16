@@ -67,7 +67,7 @@ class IndexView(View):
                     "summary": summary
                 }
 
-            db.child('Reports1').set(data)
+            db.child('Reports').set(data)
 
 
         return redirect('index')
