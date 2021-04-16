@@ -19,16 +19,16 @@ firebaseConfig = {
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 authe = firebase.auth()
-database = firebase.database()
+db = firebase.database()
 
 class IndexView(View):
 
     def get(self, request):
-        mem1 = database.child('Member 1').get().val()
-        mem2 = database.child('Member 2').get().val()
-        mem3 = database.child('Member 3').get().val()
-        mem4 = database.child('Member 4').get().val()
-        mem5 = database.child('Member 5').get().val()
+        mem1 = db.child('Member 1').get().val()
+        mem2 = db.child('Member 2').get().val()
+        mem3 = db.child('Member 3').get().val()
+        mem4 = db.child('Member 4').get().val()
+        mem5 = db.child('Member 5').get().val()
         context = {
             "mem1": mem1,
             "mem2": mem2,
