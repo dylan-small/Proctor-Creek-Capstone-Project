@@ -50,7 +50,7 @@ class IndexView(View):
             # create a form instance and populate it with data from the request:
             form = Report(request.POST)
             # check whether it's valid:
-            if form.is_valid()
+            if form.is_valid():
                 # get data from input tags in html with these names
                 first_name = form.get('first_name')
                 last_name = form.get('last_name')
@@ -67,16 +67,7 @@ class IndexView(View):
                     "summary": summary
                 }
 
-                # process the data in form.cleaned_data as required
-                # ...
-                # redirect to a new URL:
-                return HttpResponseRedirect('')
-
-        # if a GET (or any other method) we'll create a blank form
-        else:
-            form = Report()
-
-        context = {form}
+            db.child('Reports').set(data)
 
         return render(request, 'proctor_creek/index.html')
 
