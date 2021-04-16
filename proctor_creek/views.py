@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import pyrebase
 from django.views import View
 from .forms import Report
@@ -38,7 +38,7 @@ class IndexView(View):
         }
         return render(request, 'proctor_creek/index.html', context)
 
-    def makeReport(self, request):
+    def post(self, request):
 
         import time
         from datetime import datetime, timezone
@@ -52,11 +52,11 @@ class IndexView(View):
             # check whether it's valid:
             if form.is_valid():
                 # get data from input tags in html with these names
-                first_name = form.get('first_name')
-                last_name = form.get('last_name')
-                email = form.get('email')
-                phone = form.get('phone')
-                summary = form.get('summary')
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                email = form.cleaned_data['email']
+                phone = form.cleaned_data['phone']
+                summary = form.cleaned_data['summary']
 
                 # create a dictionary to push to db
                 data = {
@@ -67,7 +67,8 @@ class IndexView(View):
                     "summary": summary
                 }
 
-            db.child('Reports').set(data)
+            db.child('Reports1').set(data)
 
-        return render(request, 'proctor_creek/index.html')
+
+        return redirect('index')
 
