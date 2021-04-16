@@ -44,6 +44,7 @@ class IndexView(View):
         from datetime import datetime, timezone
 
         current_time = datetime.now(timezone.utc)
+        print(current_time)
 
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
@@ -67,7 +68,7 @@ class IndexView(View):
                     "summary": summary
                 }
 
-            db.child('Reports').set(data)
+            db.child('Reports').child('report1').set(data)
 
 
         return redirect('index')
