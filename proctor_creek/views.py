@@ -38,14 +38,35 @@ class IndexView(View):
         }
         return render(request, 'proctor_creek/index.html', context)
 
-    def post(self, request):
+    def makeReport(self, request):
+
+        import time
+        from datetime import datetime, timezone
+
+        current_time = datetime.now(timezone.utc)
+
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
             form = Report(request.POST)
             # check whether it's valid:
-            if form.is_valid():
-                firstName = form.cleaned_data('')
+            if form.is_valid()
+                # get data from input tags in html with these names
+                first_name = form.get('first_name')
+                last_name = form.get('last_name')
+                email = form.get('email')
+                phone = form.get('phone')
+                summary = form.get('summary')
+
+                # create a dictionary to push to db
+                data = {
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "email": email,
+                    "phone": phone,
+                    "summary": summary
+                }
+
                 # process the data in form.cleaned_data as required
                 # ...
                 # redirect to a new URL:
@@ -57,5 +78,5 @@ class IndexView(View):
 
         context = {form}
 
-        return render(request, '', form)
+        return render(request, 'proctor_creek/index.html')
 
