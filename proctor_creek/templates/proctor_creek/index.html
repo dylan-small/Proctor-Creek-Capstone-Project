@@ -35,20 +35,20 @@
 
             <label for="problem_select">Which describes the problem?</label><br>
 
-            <input type="radio" id="tire_dumping_option" name="problem type" value="Tire Dumping">
+            <input type="radio" id="tire_dumping_option" name="problem_type" value="Tire Dumping">
             <label for="tire_dumping_option">Tire Dumping</label><br>
 
-            <input type="radio" id="standing_water_option" name="problem type" value="Standing Water">
+            <input type="radio" id="standing_water_option" name="problem_type" value="Standing Water">
             <label for="standing_water_option">Standing Water</label><br>
 
-            <input type="radio" id="miscellaneous" name="problem type" value="Miscellaneous">
+            <input type="radio" id="miscellaneous" name="problem_type" value="Miscellaneous">
             <label for="miscellaneous">Miscellaneous</label><br>
 
             <label for="summary">Summary *:</label><br>
             <input type = "summary" id="summary" name="summary", required="true"><br>
             
             <img id="preview" alt="your image" width="100" height="100" />
-            <input type="file" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" accept=".jpeg,.png" id=="photo" name="photo_name"><br>
+            <input type="file" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" accept=".jpeg, .png, .jpg" id="photo" name="photo_name"><br>
             <!--on change of this input field, place image in preview-->
             
             <button type="submit">Submit</button><br>

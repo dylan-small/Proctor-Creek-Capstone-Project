@@ -55,7 +55,7 @@ class IndexView(View):
                 last_name = form.cleaned_data['last_name']
                 email = form.cleaned_data['email']
                 phone = form.cleaned_data['phone']
-                # type = form.cleaned_data['type']
+                problem_type = form.cleaned_data['problem_type']
                 summary = form.cleaned_data['summary']
 
                 # create a dictionary to push to db
@@ -64,11 +64,10 @@ class IndexView(View):
                     "last_name": last_name,
                     "email": email,
                     "phone": phone,
-                    # 'type': type,
+                    'problem_type': problem_type,
                     "summary": summary
                 }
 
-            # db.child('Reports').child(type).child(current_time).set(data)
-            db.child('Unresolved Reports').child(current_time).set(data)
+            db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
 
         return redirect('index')
