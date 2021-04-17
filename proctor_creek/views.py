@@ -40,9 +40,8 @@ class IndexView(View):
 
     def post(self, request):
 
-        import time
-        from datetime import datetime, timezone
-
+        # get formatted string of date and time
+        from datetime import datetime
         current_time = datetime.now().strftime("%Y/%B/%d/%H:%M:%S")
 
         # if this is a POST request we need to process the form data
@@ -56,6 +55,7 @@ class IndexView(View):
                 last_name = form.cleaned_data['last_name']
                 email = form.cleaned_data['email']
                 phone = form.cleaned_data['phone']
+                # type = form.cleaned_data['type']
                 summary = form.cleaned_data['summary']
 
                 # create a dictionary to push to db
@@ -64,11 +64,11 @@ class IndexView(View):
                     "last_name": last_name,
                     "email": email,
                     "phone": phone,
+                    # 'type': type,
                     "summary": summary
                 }
 
-            db.child('Reports').child(current_time).set(data)
-
+            # db.child('Reports').child(type).child(current_time).set(data)
+            db.child('Unresolved Reports').child(current_time).set(data)
 
         return redirect('index')
-
