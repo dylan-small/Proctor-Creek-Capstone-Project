@@ -31,7 +31,7 @@ class IndexView(View):
 
         # get formatted string of date and time
         from datetime import datetime
-        current_time = datetime.now().strftime("%Y/%B/%d/%H:%M:%S")
+        report_number = datetime.now().strftime("%Y/%m%d%y%H%M%S")
 
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
@@ -48,8 +48,11 @@ class IndexView(View):
                 summary = form.cleaned_data['summary']
                 image = form.cleaned_data['image']
 
+                report_datetime = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+
                 # create a dictionary to push to db
                 data = {
+                    "date": report_datetime,
                     "first_name": first_name,
                     "last_name": last_name,
                     "email": email,
@@ -59,6 +62,7 @@ class IndexView(View):
                     "image": image
                 }
 
-            db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
+            # db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
+            db.child('Unresolved Reports').child(problem_type).child(report_number).set(data)
 
         return redirect('index')

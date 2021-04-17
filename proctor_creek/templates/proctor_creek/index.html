@@ -102,6 +102,10 @@
                 var imgRef = storageRef.child('Report Images');
                 var thisRef = imgRef.child(imgFile.name).put(imgFile);
                 thisRef.on('state_changed',
+                    (snapshot) => {
+                        console.log("Continue.");
+                    },
+
                     (error) => {
                         console.log("ERROR: " + error);
                     },
