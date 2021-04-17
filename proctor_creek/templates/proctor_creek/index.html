@@ -49,6 +49,7 @@
             
             <img id="preview" alt="your image" width="300" height="300" />
             <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="photo" name="photo_name"><br>
+            <button type="button" onclick="storeImage()">Upload Image</button>
             <!--on change of this input field, place image in preview-->
             
             <button type="submit">Submit</button><br>
@@ -60,27 +61,22 @@
             Copy and paste these scripts into the bottom of your <body> tag,
             but before you use any Firebase services:
         -->
-        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
-             https://firebase.google.com/docs/web/setup#available-libraries -->
+             https://firebase.google.com/docs/web/setup#available-libraries
+             /firebase-app must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
 
         <script>
-            /**
-             * This function processes the input image file and outputs to the img tag
-             */
-            function displayPicPreview(input) {
-                document.getElementById('preview').src = window.URL.createObjectURL(input.files[0]);
-            }
-
             // Your web app's Firebase configuration
             // For Firebase JS SDK v7.20.0 and later, measurementId is optional
             var firebaseConfig = {
                 apiKey: "AIzaSyBnh3EsTetGpOzDeGUXuQsT7Q-oF8fu1mU",
                 authDomain: "proctor-creek-capstone-project.firebaseapp.com",
                 projectId: "proctor-creek-capstone-project",
-                storageBucket: "proctor-creek-capstone-project.appspot.com",
+                storageBucket: "gs://proctor-creek-capstone-project.appspot.com",
                 messagingSenderId: "1099094981367",
                 appId: "1:1099094981367:web:74525f31783efc681971f2",
                 measurementId: "G-04YP1GBKLL"
@@ -88,6 +84,35 @@
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
+
+            /**
+             * This function processes the input image file and outputs to the img tag
+             */
+            function displayPicPreview(input) {
+                document.getElementById('preview').src = window.URL.createObjectURL(input.files[0]);
+            }
+
+            function storeImage() {
+                var storage = firebase.storage();
+                var imgFile = document.getElementById("photo").files[0];
+                var storageRef = storage.ref();
+                var thisRef = storageRef.child(imgFile.name).put(imgFile);
+                thisRef.on('state_changed',
+                    function(snapshot) {
+                        console.log("File uploaded successfully.")
+                    },
+
+                    function(error) {
+
+                    },
+
+                    function() {
+                        // after image uploads successfully, get the download URL
+                        var downloadURL = thisRef.snapshot.downloadURL;
+                        console.log("Download URL created successfully.")
+                    }
+                );
+            }
         </script>
     </body>
 </html>
