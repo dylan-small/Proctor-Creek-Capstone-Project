@@ -24,19 +24,8 @@ db = firebase.database()
 class IndexView(View):
 
     def get(self, request):
-        mem1 = db.child('Member 1').get().val()
-        mem2 = db.child('Member 2').get().val()
-        mem3 = db.child('Member 3').get().val()
-        mem4 = db.child('Member 4').get().val()
-        mem5 = db.child('Member 5').get().val()
-        context = {
-            "mem1": mem1,
-            "mem2": mem2,
-            "mem3": mem3,
-            "mem4": mem4,
-            "mem5": mem5
-        }
-        return render(request, 'proctor_creek/index.html', context)
+
+        return render(request, 'proctor_creek/index.html')
 
     def post(self, request):
 
@@ -57,6 +46,7 @@ class IndexView(View):
                 phone = form.cleaned_data['phone']
                 problem_type = form.cleaned_data['problem_type']
                 summary = form.cleaned_data['summary']
+                image = form.cleaned_data['image']
 
                 # create a dictionary to push to db
                 data = {
@@ -65,7 +55,8 @@ class IndexView(View):
                     "email": email,
                     "phone": phone,
                     'problem_type': problem_type,
-                    "summary": summary
+                    "summary": summary,
+                    "image": image
                 }
 
             db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)

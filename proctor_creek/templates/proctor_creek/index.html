@@ -15,7 +15,7 @@
 
         <!-- Add your site or application content here -->
         <h1>Team 1108</h1>
-        <h2>Members: {{ mem1 }}, {{ mem2 }}, {{ mem3 }}, {{ mem4 }}, {{ mem5 }}</h2>
+        <h2>Members: Joanna Tolentino, Sam Milner, Dylan Small, Grayson Raulston, Ryan Bauer</h2>
 
 
         <form action="{% url 'index' %}" method="POST">
@@ -48,7 +48,7 @@
             <input type = "summary" id="summary" name="summary", required="true"><br>
             
             <img id="preview" alt="your image" width="300" height="300" />
-            <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="photo" name="photo_name"><br>
+            <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="image" name="image"><br>
             <button type="button" onclick="storeImage()">Upload Image</button>
             <!--on change of this input field, place image in preview-->
             
@@ -92,17 +92,16 @@
                 document.getElementById('preview').src = window.URL.createObjectURL(input.files[0]);
             }
 
+            /**
+             * This function stores the image into Firebase storage
+             */
             function storeImage() {
                 var storage = firebase.storage();
-                var imgFile = document.getElementById("photo").files[0];
+                var imgFile = document.getElementById("image").files[0];
                 var storageRef = storage.ref();
                 var imgRef = storageRef.child('Report Images');
                 var thisRef = imgRef.child(imgFile.name).put(imgFile);
                 thisRef.on('state_changed',
-                    (snapshot) => {
-                        console.log("File uploaded successfully.");
-                    },
-
                     (error) => {
                         console.log("ERROR: " + error);
                     },
@@ -111,6 +110,7 @@
                         // after image uploads successfully, get the download URL
                         thisRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
                             console.log('File available at', downloadURL);
+                            alert("Image upload was sucessful.")
                         });
                     }
                 );
