@@ -44,7 +44,7 @@ class IndexView(View):
         from datetime import datetime, timezone
 
         current_time = datetime.now(timezone.utc)
-        print(current_time)
+        print(current_time) # only want up until char 18 of this var
 
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
