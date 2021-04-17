@@ -96,20 +96,22 @@
                 var storage = firebase.storage();
                 var imgFile = document.getElementById("photo").files[0];
                 var storageRef = storage.ref();
-                var thisRef = storageRef.child(imgFile.name).put(imgFile);
+                var imgRef = storageRef.child('Report Images');
+                var thisRef = imgRef.child(imgFile.name).put(imgFile);
                 thisRef.on('state_changed',
-                    function(snapshot) {
-                        console.log("File uploaded successfully.")
+                    (snapshot) => {
+                        console.log("File uploaded successfully.");
                     },
 
-                    function(error) {
-
+                    (error) => {
+                        console.log("ERROR: " + error);
                     },
 
-                    function() {
+                    () => {
                         // after image uploads successfully, get the download URL
-                        var downloadURL = thisRef.snapshot.downloadURL;
-                        console.log("Download URL created successfully.")
+                        thisRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                            console.log('File available at', downloadURL);
+                        });
                     }
                 );
             }
