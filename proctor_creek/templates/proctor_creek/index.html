@@ -25,19 +25,18 @@
             <!--I'm not sure how to tie this in with anything else-->
             <br>
             <label for="first_name">First Name:</label>
-            <input type = "text" id="first_name" name="first_name">
+            <input type = "text" id="first_name" name="first_name", required="true">
             <label for="last_name">Last Name:</label>
-            <input type = "text" id="last_name" name="last_name"><br>
+            <input type = "text" id="last_name" name="last_name", required="true"><br>
             <label for="email">Email *:</label>
-            <input type = "text" id="email" name="email"><br><!--use input type="email"to validate?-->
+            <input type = "text" id="email" name="email", required="true"><br><!--use input type="email"to validate?-->
             <label for="phone">Phone *:</label>
             <input type = "text" id="phone" name="phone"><br>
             <label for="summary">Summary *:</label>
-            <input type = "summary" id="summary" name="summary"><br>
+            <input type = "summary" id="summary" name="summary", required="true"><br>
             <img id="preview" alt="your image" width="100" height="100" />
             <input type="file" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" accept=".jpeg,.png" id=="photo" name="photo_name"><br>
             <!--on change of this input field, place image in preview-->
-            <!--can edit button name with css-->
             <button type="submit">Submit</button><br>
         </form>
 
