@@ -43,8 +43,7 @@ class IndexView(View):
         import time
         from datetime import datetime, timezone
 
-        current_time = datetime.now(timezone.utc)
-        print(current_time) # only want up until char 18 of this var
+        current_time = datetime.now().strftime("%Y/%B/%d/%H:%M:%S")
 
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
@@ -68,7 +67,7 @@ class IndexView(View):
                     "summary": summary
                 }
 
-            db.child('Reports').child('report1').set(data)
+            db.child('Reports').child(current_time).set(data)
 
 
         return redirect('index')
