@@ -63,15 +63,53 @@
         </div>
 
         <div class="form-group">
-
+            <img id="preview" width="300" height="300" />
+            <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="image" name="image"><br>
+            <button type="button" onclick="storeImage()">Upload Image</button>
         </div>
 
 
-        <img id="preview" width="300" height="300" />
-        <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="image" name="image"><br>
-        <button type="button" onclick="storeImage()">Upload Image</button>
+
         <!--on change of this input field, place image in preview-->
 
         <button class="btn btn-success" type="submit">Submit</button><br>
     </form>
 {%  endblock content %}
+{%  block scripts %}
+    <script>
+        /**
+         * This function processes the input image file and outputs to the img tag
+         */
+        function displayPicPreview(input) {
+            document.getElementById('preview').src = window.URL.createObjectURL(input.files[0]);
+        }
+
+        /**
+         * This function stores the image into Firebase storage
+         */
+        function storeImage() {
+            var storage = firebase.storage();
+            var imgFile = document.getElementById("image").files[0];
+            var storageRef = storage.ref();
+            var imgRef = storageRef.child('Report Images');
+            var thisRef = imgRef.child(imgFile.name).put(imgFile);
+            thisRef.on('state_changed',
+                (snapshot) => {
+                    console.log("Continue.");
+                },
+
+                (error) => {
+                    console.log("ERROR: " + error);
+                },
+
+                () => {
+                    // after image uploads successfully, get the download URL
+                    thisRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        alert("Image upload was sucessful.")
+                    });
+                }
+            );
+        }
+    </script>
+{%  endblock scripts %}
