@@ -62,7 +62,7 @@ class ReportView(View):
                     "image": image
                 }
 
-            # db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
-            db.child('Unresolved Reports').child(problem_type).child(report_number).set(data)
+                # db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
+                db.child('Unresolved Reports').child(problem_type).child(report_number).set(data)
 
         return redirect('report')
