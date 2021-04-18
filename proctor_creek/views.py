@@ -21,11 +21,11 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 authe = firebase.auth()
 db = firebase.database()
 
-class IndexView(View):
+class ReportView(View):
 
     def get(self, request):
 
-        return render(request, 'proctor_creek/index.html')
+        return render(request, 'proctor_creek/report.html')
 
     def post(self, request):
 
@@ -65,4 +65,4 @@ class IndexView(View):
             # db.child('Unresolved Reports').child(problem_type).child(current_time).set(data)
             db.child('Unresolved Reports').child(problem_type).child(report_number).set(data)
 
-        return redirect('index')
+        return redirect('report')
