@@ -1,7 +1,7 @@
 {% extends 'proctor_creek/base.html' %}
 {%  block content %}
-    <h1>Team 1108</h1>
-    <h2>Members: Joanna Tolentino, Sam Milner, Dylan Small, Grayson Raulston, Ryan Bauer</h2>
+    <h1>File a Report</h1>
+    <h4>Team 1108 - Members: Joanna Tolentino, Sam Milner, Dylan Small, Grayson Raulston, Ryan Bauer</h4>
 
 
     <form action="{% url 'report' %}" method="POST">
@@ -64,14 +64,10 @@
 
         <div class="form-group">
             <img id="preview" width="300" height="300" />
+            <!--on change of this input field, place image in preview-->
             <input type="file" onchange="displayPicPreview(this)" accept="image/*" id="image" name="image"><br>
             <button type="button" onclick="storeImage()">Upload Image</button>
         </div>
-
-
-
-        <!--on change of this input field, place image in preview-->
-
         <button class="btn btn-success" type="submit">Submit</button><br>
     </form>
 {%  endblock content %}
